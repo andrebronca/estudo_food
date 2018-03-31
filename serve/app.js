@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
-//Diretorio do angular
+//Diretorio do Angular 5
 app.use(express.static(path.join(__dirname, '../dist/')));
 
 //app.use('/', index);
