@@ -2,13 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ProdutosListaComponent } from './produtos-lista.component';
+import { ProdutoRoutingModule } from './produto-routing.module';
+import { ProdutoDetalheComponent } from './produto-detalhe.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ProdutoRoutingModule
   ],
   declarations: [
-    ProdutosListaComponent
+    ProdutosListaComponent,
+    ProdutoDetalheComponent
   ],
   exports: [
     ProdutosListaComponent
