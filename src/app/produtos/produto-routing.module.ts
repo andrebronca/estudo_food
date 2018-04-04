@@ -5,12 +5,16 @@ import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.compo
 
 const produtoRoutes: Routes = [
   {path: 'produtos', component: ProdutosListaComponent},
-  {path: 'produtos/save', component: ProdutoDetalheComponent}
+  {path: 'produtos/save', component: ProdutoDetalheComponent},
+  {path: 'produtos/save/:id', component: ProdutoDetalheComponent}
 ]
 
 @NgModule({
   imports: [
     RouterModule.forChild( produtoRoutes )
+  ],
+  exports: [
+    RouterModule
   ]
 })
 export class ProdutoRoutingModule {

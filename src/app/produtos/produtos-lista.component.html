@@ -3,20 +3,20 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="page-header">
           <h2>Lista de produtos</h2>
-          <a href="#" class="btn btn-success">Adicionar</a>
+          <a href="#" class="btn btn-success" routerLink="/produtos/save">Adicionar</a>
       </div>
 
       <table class="table table-striped table-hover">
         <thead>
           <tr>
             <th>Cód</th>
-          <th>Descrição</th>
-          <th>Preço</th>
-          <th>Editar</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let p of produtos">
+          <tr *ngFor="let p of produtos" [routerLink]="['/produtos/save',p.id]">
             <td>{{p.id}}</td>
             <td>{{p.descricao}}</td>
             <td>{{p.preco}}</td>
