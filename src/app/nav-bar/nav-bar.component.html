@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Principal <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="/">Principal <span class="sr-only">(current)</span></a>
         </li>
         <!--
         <li class="nav-item">
@@ -21,9 +21,10 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"
             href="#" id="dropdown01" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Produtos</a>
+            aria-haspopup="true" aria-expanded="false"
+            routerLink="/produtos">Produtos</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#">Adicionar</a>
+            <a class="dropdown-item" routerLink="/produtos/save">Adicionar</a>
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
@@ -31,9 +32,9 @@
         <!-- deixar como exemplo para futuras implementações -->
         <li class="nav-item dropdown" ngbDropdown>
             <a class="nav-link dropdown-toggle" id="dropdown01"
-              ngbDropdownToggle>Category</a>
+              ngbDropdownToggle routerLink="">Produtos</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01" ngbDropdownMenu>
-              <a class="dropdown-item" href="#">Angular</a>
+              <a class="dropdown-item" href="#">Adicionar</a>
               <a class="dropdown-item" href="#">React</a>
               <a class="dropdown-item" href="#">Vue.js</a>
             </div>
