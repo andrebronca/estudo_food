@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ProdutosListaComponent } from './produtos-lista.component';
 import { ProdutoRoutingModule } from './produto-routing.module';
 import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
+import { ProdutoService } from './produto.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,9 @@ import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.compo
   ],
   exports: [
     ProdutosListaComponent
+  ],
+  providers: [
+    ProdutoService
   ]
 })
 export class ProdutosModule {

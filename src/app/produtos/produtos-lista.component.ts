@@ -1,7 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { Produto } from './produto.model';
-import { PRODUTOS } from './produtos-mock';
+import { ProdutoService } from "./produto.service";
 
 @Component({
   moduleId: module.id,
@@ -9,7 +9,17 @@ import { PRODUTOS } from './produtos-mock';
   templateUrl: 'produtos-lista.component.html',
   styleUrls: ['./produtos-lista.component.css']
 })
-export class ProdutosListaComponent {
+export class ProdutosListaComponent implements OnInit {
 
-  produtos: Produto[] = PRODUTOS;
+  produtos: Produto[];
+
+  constructor(private produtoService: ProdutoService){
+
+  }
+
+  ngOnInit(): void {
+    this.produtos = this.produtoService.getProdutos();
+  }
+
+
 }
