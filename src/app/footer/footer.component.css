@@ -1,0 +1,5 @@
+footer{
+  width:100%;
+  min-height:100px;
+  background-color: lightgray; /* This color gets inverted color or you can add navbar inverse class in html */
+}

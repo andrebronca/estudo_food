@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ProdutosListaComponent } from './produtos-lista.component';
 import { ProdutoRoutingModule } from './produto-routing.module';
-import { ProdutoDetalheComponent } from './produto-detalhe.component';
+import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
 
 @NgModule({
   imports: [
