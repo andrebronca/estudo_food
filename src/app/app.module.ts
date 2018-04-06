@@ -8,9 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { ProdutoComponent } from './produto/produto.component';
-import { ProdutoService } from './produto/produto.service';
-
 import { ProdutosModule } from './produtos/produtos.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -19,7 +16,6 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ProdutoComponent,
     NavBarComponent,
     FooterComponent
 
@@ -34,8 +30,6 @@ import { FooterComponent } from './footer/footer.component';
     NgbModule.forRoot()
   ],
   providers: [
-    ProdutoService,
-
   ],
   bootstrap: [AppComponent]
 })

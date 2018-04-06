@@ -38,11 +38,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname + '/api/', 'public')));
 
+
+
+//CORS
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 //Api Router
 app.use('/api/v1', index);
 
 //api doc
 app.use('/doc', express.static(path.join(__dirname + '/api/', 'public/apidoc')));
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
