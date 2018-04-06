@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
 
-    "express": "node ./serve/bin/www"
+    "express": "node ./api/bin/www"
   },
   "private": true,
   "dependencies": {
