@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('food:server');
+var app = require('../../app');
+var debug = require('debug')('mobills:server');
 var http = require('http');
 
 /**
