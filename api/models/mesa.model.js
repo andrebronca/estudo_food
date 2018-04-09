@@ -1,36 +1,19 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+
+const Pedido = require('./pedido.model');
+
 /**
  * User Schema
  */
-const PedidoSchema = new Schema({
-    cliente: {
+const MesaSchema = new Schema({
+    descricao: {
       type: String,
       required: true
     },
-    item: [{ 
-        _id : false,
-        produto_id: {
-            type: Schema.Types.ObjectId,
-            ref: 'Produtos'
-        },
-        quantidade: {
-          type: Number,
-          required: true
-        },
-        valor_unitario:{
-          type: Number,
-          required: true
-        },
-        valor_total:{
-          type: Number,
-          required: true
-        }
-    }],
-    valor: {
-      type: Number,
-      required: true
+    pedido:{
+      type: Pedido.schema
     }
   },
   {
@@ -50,12 +33,12 @@ const PedidoSchema = new Schema({
 /**
  * Methods
  */
-PedidoSchema.method({'cria' : function (id) {
+MesaSchema.method({'cria' : function (id) {
   return this.findById(id)
   .exec()
-  .then((pedido) => {
-    if (pedido) {
-      return pedido;
+  .then((mesa) => {
+    if (mesa) {
+      return mesa;
     }
     const err = new Error('Pedido não existe');
     return Promise.reject(err);
@@ -66,7 +49,7 @@ PedidoSchema.method({'cria' : function (id) {
 /**
  * Statics
  */
-PedidoSchema.statics = {
+MesaSchema.statics = {
   /**
    * Get user
    * @param {ObjectId} id - The objectId of user.
@@ -75,9 +58,9 @@ PedidoSchema.statics = {
   get(id) {
     return this.findById(id)
       .exec()
-      .then((pedido) => {
-        if (pedido) {
-          return pedido;
+      .then((mesa) => {
+        if (mesa) {
+          return mesa;
         }
         const err = new Error('Pedido não existe');
         return Promise.reject(err);
@@ -106,4 +89,4 @@ PedidoSchema.statics = {
 /**
  * @typedef User
  */
-module.exports = mongoose.model('Pedido', PedidoSchema);
+module.exports = mongoose.model('Pedido', MesaSchema);

@@ -33,6 +33,7 @@ function create(req, res, next) {
     //ativo: req.body.ativo,
     item: req.body.item,
     //cor: req.body.cor
+    valor: req.body.valor
   });
 
   pedido.save()
@@ -66,8 +67,11 @@ function update(req, res, next) {
  * @returns {Pedido[]}
  */
 function list(req, res, next) {
-  const { limit = 50, skip = 0 } = req.query;
-  Pedido.list({ limit, skip })
+  //const { limit = 50, skip = 0 } = req.query;
+ // Pedido.list({ limit, skip })
+  Pedido.find()
+    .populate({path: 'item.produto_id',
+                model: 'Produto'})
     .then(pedidos => res.json(pedidos))
     .catch(e => next(e));
 }
