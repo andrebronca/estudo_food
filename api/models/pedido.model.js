@@ -10,7 +10,7 @@ const PedidoSchema = new Schema({
       required: true
     },
     item: [{ 
-        _id : false,
+        //_id : false, //mais facil de encontrar criando um id por registro
         produto_id: {
             type: Schema.Types.ObjectId,
             ref: 'Produtos'
