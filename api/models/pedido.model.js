@@ -50,17 +50,28 @@ const PedidoSchema = new Schema({
 /**
  * Methods
  */
-PedidoSchema.method({'cria' : function (id) {
-  return this.findById(id)
-  .exec()
-  .then((pedido) => {
-    if (pedido) {
-      return pedido;
+PedidoSchema.method({
+  'cria' : function (dados) {
+  return this.model('Pedido').create(dados)
+    .then((pedido) => {
+      if (pedido) {
+        return pedido;
+      }
+      const err = new Error('Pedido não existe');
+      return Promise.reject(err);
+    });
+  },
+  'teste' : function () {
+    return this.model('Pedido').find()
+    // .exec()
+      .then((pedido) => {
+        if (pedido) {
+          return pedido;
+        }
+        const err = new Error('Pedido não existe');
+        return Promise.reject(err);
+      });
     }
-    const err = new Error('Pedido não existe');
-    return Promise.reject(err);
-  });
-}
 });
 
 /**

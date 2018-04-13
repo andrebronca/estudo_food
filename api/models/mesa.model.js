@@ -89,4 +89,4 @@ MesaSchema.statics = {
 /**
  * @typedef User
  */
-module.exports = mongoose.model('Pedido', MesaSchema);
+module.exports = mongoose.model('Mesa', MesaSchema);

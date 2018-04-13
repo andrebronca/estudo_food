@@ -27,18 +27,24 @@ function get(req, res) {
  * @returns {Pedido}
  */
 function create(req, res, next) {
-  const pedido = new Pedido({
+  const dados = {
     cliente: req.body.cliente,
     // Toda pedido fica ativa como padrão
     //ativo: req.body.ativo,
     item: req.body.item,
     //cor: req.body.cor
     valor: req.body.valor
-  });
+  };
 
-  pedido.save()
+  // pedido.save()
+  //   .then(savedPedido => res.json(savedPedido))
+  //   .catch(e => next(e));
+
+  var pedido = new Pedido();
+  pedido.cria(dados)
     .then(savedPedido => res.json(savedPedido))
     .catch(e => next(e));
+  ;
 }
 
 /**
@@ -69,11 +75,19 @@ function update(req, res, next) {
 function list(req, res, next) {
   //const { limit = 50, skip = 0 } = req.query;
  // Pedido.list({ limit, skip })
-  Pedido.find()
-    .populate({path: 'item.produto_id',
-                model: 'Produto'})
-    .then(pedidos => res.json(pedidos))
-    .catch(e => next(e));
+  // Pedido.find()
+  //   .populate({path: 'item.produto_id',
+  //               model: 'Produto'})
+  //   .then(pedidos => res.json(pedidos))
+  //   .catch(e => next(e));
+  var pedido = new Pedido;
+  var teste = pedido.teste()
+
+  //res.json(teste)
+  // .populate({path: 'item.produto_id',
+  //               model: 'Produto'})
+     .then(pedidos => res.json(pedidos))
+     .catch(e => next(e));
 }
 
 // /**
