@@ -13,7 +13,7 @@ const PedidoSchema = new Schema({
         //_id : false, //mais facil de encontrar criando um id por registro
         produto_id: {
             type: Schema.Types.ObjectId,
-            ref: 'Produtos'
+            ref: 'Produto'
         },
         quantidade: {
           type: Number,
@@ -31,6 +31,10 @@ const PedidoSchema = new Schema({
     valor: {
       type: Number,
       required: true
+    },
+    mesa_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'Mesa'
     }
   },
   {

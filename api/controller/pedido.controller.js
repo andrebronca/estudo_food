@@ -22,29 +22,21 @@ function get(req, res) {
 
 /**
  * Cria uma nova pedido
- * @property {string} req.body.descricao - Descrição pedido.
+ * @property {string} req.body.cliente - Descrição pedido.
  * @property {string} req.body.cor - Cor da pedido.
  * @returns {Pedido}
  */
 function create(req, res, next) {
-  const dados = {
+  const pedido = new Pedido({
     cliente: req.body.cliente,
-    // Toda pedido fica ativa como padrão
-    //ativo: req.body.ativo,
     item: req.body.item,
-    //cor: req.body.cor
-    valor: req.body.valor
-  };
+    valor: req.body.valor,
+    mesa: req.body.mesa
+  });
 
-  // pedido.save()
-  //   .then(savedPedido => res.json(savedPedido))
-  //   .catch(e => next(e));
-
-  var pedido = new Pedido();
-  pedido.cria(dados)
+  pedido.save()
     .then(savedPedido => res.json(savedPedido))
     .catch(e => next(e));
-  ;
 }
 
 /**
@@ -57,9 +49,9 @@ function create(req, res, next) {
 function update(req, res, next) {
   const pedido = req.pedido;
   pedido.cliente = req.body.cliente;
-  //Altera somente para desativado (exclui), não atualiza
-  //pedido.ativo = req.body.ativo;
   pedido.item = req.body.item;
+  pedido.valor = req.body.valor;
+  pedido.mesa = req.body.mesa;
 
   pedido.save()
     .then(savedPedido => res.json(savedPedido))
@@ -73,21 +65,11 @@ function update(req, res, next) {
  * @returns {Pedido[]}
  */
 function list(req, res, next) {
-  //const { limit = 50, skip = 0 } = req.query;
- // Pedido.list({ limit, skip })
-  // Pedido.find()
-  //   .populate({path: 'item.produto_id',
-  //               model: 'Produto'})
-  //   .then(pedidos => res.json(pedidos))
-  //   .catch(e => next(e));
-  var pedido = new Pedido;
-  var teste = pedido.teste()
+  const { limit = 50, skip = 0 } = req.query;
+  Pedido.list({ limit, skip })
+    .then(pedidos => res.json(pedidos))
+    .catch(e => next(e));
 
-  //res.json(teste)
-  // .populate({path: 'item.produto_id',
-  //               model: 'Produto'})
-     .then(pedidos => res.json(pedidos))
-     .catch(e => next(e));
 }
 
 // /**
@@ -107,9 +89,7 @@ function list(req, res, next) {
  */
 function desativa(req, res, next) {
   const pedido = req.pedido;
-  //pedido.cliente = req.body.cliente;
   pedido.ativo = 'n';
-  //spedido.cor = req.body.cor;
 
   pedido.save()
     .then(savedPedido => res.json(savedPedido))
