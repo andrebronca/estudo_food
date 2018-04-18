@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var hateoasLinker = require('./api/lib/hateoas');
+
 //Import the mongoose module
 var mongoose = require('mongoose');
 
@@ -38,7 +40,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname + '/api/', 'public')));
 
-
+//lib para alterar res.json implementado hateoas
+app.use(hateoasLinker);
 
 //CORS
 app.use((req, res, next) => {

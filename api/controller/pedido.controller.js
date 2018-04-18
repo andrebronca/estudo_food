@@ -17,20 +17,11 @@ function load(req, res, next, id) {
  * @returns {Pedido}
  */
 function get(req, res) {
-  var tes = {
-    requeset: {
+  var hateoas = [{
       type: 'GET',
       url: 'http://localhost:3000/api/v1/pedidos/' + req.pedido._id
-    }
-  }
-
-var person = Object.assign(tes, req.pedido._doc);
-  var resultado = {
-    menssage: "Lista de pedido",
-    count: req.pedido.length,
-    pedido: person
-  }
-  return res.status(200).json(resultado);
+    }]
+  return res.status(200).json(req.pedido,hateoas);
 }
 
 /**
@@ -85,11 +76,13 @@ function list(req, res, next) {
         mensage: 'Lista de pedidos',  
         count: docs.length,
         pedidos: docs.map(doc =>{
-          var hadoas = [{
+          var links = [{
+            rel: "self",
             method: 'GET',
             href: 'http://localhost:3000/api/v1/pedidos/' + doc._id
           }];
-          doc._doc.links = hadoas;
+          var doc = JSON.parse(JSON.stringify(doc));
+          doc.links = links;
           return doc
       })
     })
