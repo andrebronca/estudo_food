@@ -107,6 +107,7 @@ PedidoSchema.statics = {
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
+      .select("item cliente valor cadastrado alterado")
       .sort({ cadastro: -1 })
       .skip(+skip)
       .limit(+limit)

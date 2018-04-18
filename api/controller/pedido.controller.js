@@ -4,7 +4,7 @@ const Pedido = require('../models/pedido.model');
  * Load pedido and append to req.
  */
 function load(req, res, next, id) {
-  Pedido.cria(id)
+  Pedido.get(id)
     .then((pedido) => {
       req.pedido = pedido; // eslint-disable-line no-param-reassign
       return next();
@@ -17,7 +17,20 @@ function load(req, res, next, id) {
  * @returns {Pedido}
  */
 function get(req, res) {
-  return res.json(req.pedido);
+  var tes = {
+    requeset: {
+      type: 'GET',
+      url: 'http://localhost:3000/api/v1/pedidos/' + req.pedido._id
+    }
+  }
+
+var person = Object.assign(tes, req.pedido._doc);
+  var resultado = {
+    menssage: "Lista de pedido",
+    count: req.pedido.length,
+    pedido: person
+  }
+  return res.status(200).json(resultado);
 }
 
 /**
@@ -67,7 +80,20 @@ function update(req, res, next) {
 function list(req, res, next) {
   const { limit = 50, skip = 0 } = req.query;
   Pedido.list({ limit, skip })
-    .then(pedidos => res.json(pedidos))
+    .then(docs => {
+      res.status(200).json({
+        mensage: 'Lista de pedidos',  
+        count: docs.length,
+        pedidos: docs.map(doc =>{
+          var hadoas = [{
+            method: 'GET',
+            href: 'http://localhost:3000/api/v1/pedidos/' + doc._id
+          }];
+          doc._doc.links = hadoas;
+          return doc
+      })
+    })
+  })
     .catch(e => next(e));
 
 }
