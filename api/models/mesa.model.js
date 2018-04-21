@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const Pedido = require('./pedido.model');
-
 /**
  * User Schema
  */
@@ -88,8 +86,7 @@ MesaSchema.statics = {
             'descricao': 1
           }
         }
-    })
-      //.populate('pedido.item')
+      })
       .sort({ cadastro: -1 })
       .skip(+skip)
       .limit(+limit)

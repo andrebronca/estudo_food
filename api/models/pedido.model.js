@@ -34,7 +34,8 @@ const PedidoSchema = new Schema({
     },
     mesa: {
       type: Schema.Types.ObjectId,
-      ref: 'Mesa'
+      ref: 'Mesa',
+      required: true
     }
   },
   {
