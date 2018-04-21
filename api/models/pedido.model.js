@@ -11,7 +11,7 @@ const PedidoSchema = new Schema({
     },
     item: [{ 
         //_id : false, //mais facil de encontrar criando um id por registro
-        produto_id: {
+        produto: {
             type: Schema.Types.ObjectId,
             ref: 'Produto'
         },
@@ -32,7 +32,7 @@ const PedidoSchema = new Schema({
       type: Number,
       required: true
     },
-    mesa_id: {
+    mesa: {
       type: Schema.Types.ObjectId,
       ref: 'Mesa'
     }
@@ -107,11 +107,13 @@ PedidoSchema.statics = {
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
+      .populate('item.produto',['descricao'])
+      .populate('mesa',['descricao'])
       .sort({ cadastro: -1 })
       .skip(+skip)
       .limit(+limit)
       //.select("item cliente valor cadastrado alterado")
-      .select({'item':1,'_id':0,'cliente':1,'valor':1,'cadastrado':1, 'alterado':1})
+      .select({'__v':0})
       .exec();
  }
 //  list(){

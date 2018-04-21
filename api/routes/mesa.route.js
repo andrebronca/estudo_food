@@ -25,6 +25,9 @@ router.route('/:mesaId')
   /** DELETE /api/titulo/:mesaId - Desativa titulo */
   .delete(MesaController.desativa);
 
+router.route('/:mesaId/pedidos')
+  //.get(MesaController.list)
+  .post(MesaController.pushPedido)
 /** Load user when API with userId route parameter is hit */
 router.param('mesaId', MesaController.load);
 

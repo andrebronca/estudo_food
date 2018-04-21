@@ -65,11 +65,10 @@ function update(req, res, next) {
  * @returns {Produto[]}
  */
 function list(req, res, next) {
-  // const { limit = 50, skip = 0 } = req.query;
-  // Produto.list({ limit, skip })
-  //   .then(produtos => res.json(produtos))
-  //   .catch(e => next(e));
-  res.json(req.query);
+  const { limit = 50, skip = 0 } = req.query;
+  Produto.list({ limit, skip })
+    .then(produtos => res.json(produtos))
+    .catch(e => next(e));
 }
 
 // /**

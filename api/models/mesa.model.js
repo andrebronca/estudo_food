@@ -12,9 +12,10 @@ const MesaSchema = new Schema({
       type: String,
       required: true
     },
-    pedido:{
-      type: Pedido.schema
-    }
+    pedido:[{
+      type: Schema.Types.ObjectId,
+      ref: 'Pedido'
+    }]
   },
   {
     timestamps: {
@@ -75,15 +76,25 @@ MesaSchema.statics = {
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
+      .select({'__v':0})
+      .populate({
+        'path':'pedido', 
+        'model': 'Pedido',
+        'select': {'__v':0}, 
+        'populate':{
+          'path':'item.produto',
+          'model': 'Produto',
+          'select':{
+            'descricao': 1
+          }
+        }
+    })
+      //.populate('pedido.item')
       .sort({ cadastro: -1 })
       .skip(+skip)
       .limit(+limit)
       .exec();
  }
-//  list(){
-//    return this.find()
-//     .exec();
-//  }
 };
 
 /**

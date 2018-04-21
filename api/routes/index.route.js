@@ -14,7 +14,7 @@ router.use('/contas', CategoriaRoute);
 router.use('/titulos', TituloRoute);
 router.use('/produtos', ProdutoRoute);
 router.use('/pedidos', PedidoRoute);
-router.use('/mesa', MesaRoute);
+router.use('/mesas', MesaRoute);
 
 
 module.exports = router;
