@@ -3,6 +3,8 @@ const express = require('express');
 //const paramValidation = require('../../config/param-validation');
 const MesaController = require('../controller/mesa.controller');
 
+const PedidoRouter = require('./pedido.route');
+
 const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/')
@@ -25,10 +27,13 @@ router.route('/:mesaId')
   /** DELETE /api/titulo/:mesaId - Desativa titulo */
   .delete(MesaController.desativa);
 
-router.route('/:mesaId/pedidos')
-  //.get(MesaController.list)
-  .post(MesaController.pushPedido)
-/** Load user when API with userId route parameter is hit */
+// router.route('/:mesaId/pedidos')
+//   //.get(MesaController.list)
+//   .post(MesaController.pushPedido)
+// /** Load user when API with userId route parameter is hit */
+
+router.use('/:mesaId/pedidos', PedidoRouter);
+
 router.param('mesaId', MesaController.load);
 
 module.exports = router;

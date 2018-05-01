@@ -106,8 +106,9 @@ PedidoSchema.statics = {
    * @param {number} limit - Limite de cadastros para retornar.
    * @returns {Promise<User[]>}
    */
-  list({ skip = 0, limit = 50 } = {}) {
-    return this.find()
+  list({ skip = 0, limit = 50 , pedidos} = {}) {
+    return this.find({ '_id': pedidos
+    })
       .populate('item.produto',['descricao'])
       .populate('mesa',['descricao'])
       .sort({ cadastro: -1 })

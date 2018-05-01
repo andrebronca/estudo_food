@@ -7,6 +7,7 @@ function load(req, res, next, id) {
   Pedido.get(id)
     .then((pedido) => {
       req.pedido = pedido; // eslint-disable-line no-param-reassign
+
       return next();
     })
     .catch(e => next(e));
@@ -70,7 +71,9 @@ function update(req, res, next) {
  */
 function list(req, res, next) {
   const { limit = 50, skip = 0 } = req.query;
-  Pedido.list({ limit, skip })
+  console.log(req.mesa);
+  pedidos = req.mesa.pedido;
+  Pedido.list({ limit, skip, pedidos })
     .then(docs => {
       res.status(200).json({
         mensage: 'Lista de pedidos',  
