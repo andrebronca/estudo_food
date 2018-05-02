@@ -36,6 +36,12 @@ const PedidoSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Mesa',
       required: true
+    },
+    ativo: {
+      type: String,
+      required: true,
+      enum: ['s','n'],
+      default: 's'
     }
   },
   {

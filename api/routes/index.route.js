@@ -13,7 +13,7 @@ router.use('/categorias', CategoriaRoute);
 router.use('/contas', CategoriaRoute);
 router.use('/titulos', TituloRoute);
 router.use('/produtos', ProdutoRoute);
-router.use('/pedidos', PedidoRoute);
+//router.use('/pedidos', PedidoRoute);
 router.use('/mesas', MesaRoute);
 
 

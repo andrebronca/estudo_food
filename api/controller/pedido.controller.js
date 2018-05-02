@@ -1,4 +1,6 @@
 const Pedido = require('../models/pedido.model');
+const Produto = require('../models/produto.model');
+const Mesa = require('../models/mesa.model');
 
 /**
  * Load pedido and append to req.
@@ -32,16 +34,41 @@ function get(req, res) {
  * @returns {Pedido}
  */
 function create(req, res, next) {
+  var item = req.body.item;
+  var mesa = req.mesa;
+
+  item.forEach(element => {
+    Produto.count({'_id': element.produto})
+      .then(cont => {
+        if(cont <= 0){
+          const err = new Error('Produto não existe');
+          err.status = 404;
+          //console.log(cont);
+          next(err);
+        }
+        //console.log(cont);
+      })
+      .catch(e => next(e));
+  });
+
   const pedido = new Pedido({
     cliente: req.body.cliente,
-    item: req.body.item,
+    item: item,
     valor: req.body.valor,
-    mesa: req.body.mesa
+    mesa: mesa._id
   });
 
   pedido.save()
-    .then(savedPedido => res.json(savedPedido))
+    .then(savedPedido => {
+
+      mesa.pedido.push(pedido);
+
+      mesa.save()
+        .then(savedMesa => res.json(savedPedido))
+        .catch(e => next(e));
+    })
     .catch(e => next(e));
+
 }
 
 /**
@@ -71,7 +98,6 @@ function update(req, res, next) {
  */
 function list(req, res, next) {
   const { limit = 50, skip = 0 } = req.query;
-  console.log(req.mesa);
   pedidos = req.mesa.pedido;
   Pedido.list({ limit, skip, pedidos })
     .then(docs => {
@@ -111,10 +137,17 @@ function list(req, res, next) {
  */
 function desativa(req, res, next) {
   const pedido = req.pedido;
+  const mesa = req.mesa;
   pedido.ativo = 'n';
 
   pedido.save()
-    .then(savedPedido => res.json(savedPedido))
+    .then(savedPedido => {
+      mesa.pedido.pull(pedido._id);
+
+      mesa.save()
+      .then(savedMesa => res.json(savedPedido))
+      .catch(e => next(e));
+    })
     .catch(e => next(e));
 }
 

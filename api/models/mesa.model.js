@@ -13,7 +13,13 @@ const MesaSchema = new Schema({
     pedido:[{
       type: Schema.Types.ObjectId,
       ref: 'Pedido'
-    }]
+    }],
+    ativo: {
+      type: String,
+      required: true,
+      enum: ['s','n'],
+      default: 's'
+    }
   },
   {
     timestamps: {
@@ -61,7 +67,7 @@ MesaSchema.statics = {
         if (mesa) {
           return mesa;
         }
-        const err = new Error('Pedido não existe');
+        const err = new Error('Mesa não existe');
         return Promise.reject(err);
       });
   },
