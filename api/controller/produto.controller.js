@@ -65,8 +65,21 @@ function update(req, res, next) {
  * @returns {Produto[]}
  */
 function list(req, res, next) {
-  const { limit = 50, skip = 0 } = req.query;
-  Produto.list({ limit, skip })
+  var { limit = 50, skip = 0, fields = 0, order, filter} = req.query;
+
+  fields = fields.replace(/,/g,' ');
+
+  prefix = 1;    
+  if (order.match(/-/)){
+    prefix = -1;
+  } 
+  campo = order.replace(/-|\s/g, '');
+
+  order = {};
+  order[campo] = prefix;
+
+  console.log(order);
+  Produto.list({ limit, skip, fields, order})
     .then(produtos => res.json(produtos))
     .catch(e => next(e));
 }

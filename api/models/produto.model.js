@@ -67,9 +67,10 @@ ProdutoSchema.statics = {
    * @param {number} limit - Limite de cadastros para retornar.
    * @returns {Promise<User[]>}
    */
-  list({ skip = 0, limit = 50 } = {}) {
+  list({ skip = 0, limit = 50, order, fields} = {}) {
     return this.find()
-      .sort({ cadastro: -1 })
+      .select(fields)
+      .sort(order)
       .skip(+skip)
       .limit(+limit)
       .exec();

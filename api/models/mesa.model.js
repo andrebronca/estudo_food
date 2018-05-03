@@ -84,14 +84,14 @@ MesaSchema.statics = {
       .populate({
         'path':'pedido', 
         'model': 'Pedido',
-        'select': {'__v':0}, 
-        'populate':{
-          'path':'item.produto',
-          'model': 'Produto',
-          'select':{
-            'descricao': 1
-          }
-        }
+        'select': {'__v':0, 'item':0}, 
+        // 'populate':{
+        //   'path':'item.produto',
+        //   'model': 'Produto',
+        //   'select':{
+        //     'descricao': 1
+        //   }
+        //}
       })
       .sort({ cadastro: -1 })
       .skip(+skip)

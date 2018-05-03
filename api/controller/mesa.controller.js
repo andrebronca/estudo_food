@@ -8,7 +8,7 @@ function load(req, res, next, id) {
     .then((mesa) => {
       req.mesa = mesa; // eslint-disable-line no-param-reassign
 
-      console.log( "to aqui");
+      //console.log( "to aqui");
       return next();
     })
     .catch(e => next(e));
