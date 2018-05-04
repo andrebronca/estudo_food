@@ -66,20 +66,39 @@ function update(req, res, next) {
  */
 function list(req, res, next) {
   var { limit = 50, skip = 0, fields = 0, order, filter} = req.query;
-
+//fields
   fields = fields.replace(/,/g,' ');
+//order
+  order = order.split(',');
+  prefix = 1;
+  orderNew = {};
+  order.forEach(element => {
+    if (element.match(/-/)){
+      prefix = -1;
+    } 
+    campo = element.replace(/-|\s/g, '');
+    
+    orderNew[campo] = prefix;
+    prefix = 1;
+  })
+  order = orderNew;    
 
-  prefix = 1;    
-  if (order.match(/-/)){
-    prefix = -1;
-  } 
-  campo = order.replace(/-|\s/g, '');
+//filter
+  filter = filter.replace(/\[|\]/g, '');
+  filter = filter.split(',');
 
-  order = {};
-  order[campo] = prefix;
+  filtro = {};
+  filter.forEach((element, index) => {
+
+   element = element.split('=');
+    filtro[element[0]] =  element[1];
+  });
+
+  filter = filtro;
 
   console.log(order);
-  Produto.list({ limit, skip, fields, order})
+   
+  Produto.list({ limit, skip, fields, order, filter})
     .then(produtos => res.json(produtos))
     .catch(e => next(e));
 }
